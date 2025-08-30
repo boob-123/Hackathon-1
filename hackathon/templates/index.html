@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>📘 Personalized Assessment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f9fc;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 70%;
+            margin: 30px auto;
+            background: #fff;
+            padding: 20px 30px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        .profile {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            background: #e8f0fe;
+            border-radius: 8px;
+        }
+        .question {
+            background: #f2f2f2;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+        }
+        .question p {
+            margin: 5px 0;
+            font-size: 16px;
+        }
+        input[type="text"] {
+            width: 95%;
+            padding: 8px;
+            margin-top: 8px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 15px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+        button:hover {
+            background: #2980b9;
+        }
+        footer {
+            margin-top: 25px;
+            text-align: center;
+            font-size: 14px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>📘 Personalized Assessment</h1>
+
+    <div class="profile">
+        <h2>Welcome, {{ profile.name }}</h2>
+        <p><b>Current Level:</b> {{ profile.level }}</p>
+        <p><b>Total Score:</b> {{ profile.score }}</p>
+    </div>
+
+    <form method="POST">
+        {% for q in questions %}
+        <div class="question">
+            <p><b>Q{{ loop.index }} [{{ q.subject }} - {{ q.difficulty }}]</b></p>
+            <p>{{ q.text }}</p>
+            <input type="text" name="q_{{ loop.index0 }}" placeholder="Your Answer">
+        </div>
+        {% endfor %}
+
+        <button type="submit">✅ Submit Answers</button>
+    </form>
+
+    <footer>
+        Adaptive AI will adjust your level after each test.
+    </footer>
+</div>
+</body>
+</html>
