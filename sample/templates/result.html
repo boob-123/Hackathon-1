@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Results</title>
+<style>
+body { font-family:'Segoe UI', sans-serif; background:#fff3e0; padding:20px; }
+.container { max-width:800px; margin:auto; }
+h2 { text-align:center; color:#e65100; }
+.score { text-align:center; font-size:20px; margin-bottom:20px; }
+.answer-card { background:#fff; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.1); padding:20px; margin-bottom:15px; }
+.correct { color:green; font-weight:bold; }
+.wrong { color:red; font-weight:bold; }
+</style>
+</head>
+<body>
+<div class="container">
+<h2>Assessment Results</h2>
+<div class="score">Score: {{ score }}/{{ total }}</div>
+{% for a in answers %}
+<div class="answer-card">
+<p><strong>Question:</strong> {{ a.text }}</p>
+<p><strong>Your Answer:</strong> {{ a.user }}</p>
+<p><strong>Correct Answer:</strong> {{ a.correct }}</p>
+<p>Status: <span class="{% if a.user|lower == a.correct|lower %}correct{% else %}wrong{% endif %}">
+{% if a.user|lower == a.correct|lower %}Correct{% else %}Wrong{% endif %}</span></p>
+</div>
+{% endfor %}
+</div>
+</body>
+</html>
