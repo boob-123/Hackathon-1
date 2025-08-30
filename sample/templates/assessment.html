@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Assessment</title>
+<style>
+body { font-family:'Segoe UI', sans-serif; background:#e0f7fa; padding:20px; }
+.container { max-width:800px; margin:auto; }
+h2 { text-align:center; color:#00796b; }
+.question-card { background:#fff; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.1); padding:20px; margin-bottom:20px; }
+.question-text { font-weight:bold; color:#333; margin-bottom:10px; }
+input[type=text] { width:100%; padding:8px; border-radius:8px; border:1px solid #ccc; margin-top:5px; outline:none; }
+input[type=submit] { display:block; width:200px; margin:30px auto; padding:12px; background:#00796b; color:white; border:none; border-radius:8px; cursor:pointer; font-size:16px; }
+input[type=submit]:hover { background:#004d40; }
+</style>
+</head>
+<body>
+<div class="container">
+<h2>Welcome {{ profile.name }}!</h2>
+<form action="/submit" method="post">
+<input type="hidden" name="total_questions" value="{{ questions|length }}">
+{% for q in questions %}
+<div class="question-card">
+<div class="question-text">{{ loop.index }}. {{ q.subject }} ({{ q.difficulty }}): {{ q.text }}</div>
+<input type="text" name="user_answer_{{ loop.index0 }}" placeholder="Your answer" required>
+<input type="hidden" name="q_text_{{ loop.index0 }}" value="{{ q.text }}">
+<input type="hidden" name="q_subject_{{ loop.index0 }}" value="{{ q.subject }}">
+<input type="hidden" name="q_difficulty_{{ loop.index0 }}" value="{{ q.difficulty }}">
+<input type="hidden" name="q_answer_{{ loop.index0 }}" value="{{ q.answer }}">
+</div>
+{% endfor %}
+<input type="submit" value="Submit Answers">
+</form>
+</div>
+</body>
+</html>
